@@ -1,0 +1,26 @@
+var findMissingRanges = function(values, start, end){
+    if(values.length === 0) return start + "->" + end;
+    var current = 0;
+    var startI =  start -1;
+    var result = [];
+    for(var i = start;i<=end; i++) {
+        if(values[current] !== i && startI === (start -1)  ) {
+            startI = i
+            continue;
+        }
+        if(values[current] == i) {
+            if(startI === (start -1) ) {
+                current++;
+                continue;
+            } else {
+                result.push(startI === (i-1) ? startI + "" : startI + "->" + (i-1))
+                startI = start -1;
+                current++;
+            }
+        }
+    }
+    if(startI !== (start-1)) {
+        result.push(startI === (i-1) ? startI + "" : startI + "->" + (i-1))
+    }
+    return result
+}
